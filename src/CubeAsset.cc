@@ -1,18 +1,77 @@
 #include "CubeAsset.h"
 
+
 CubeAsset::CubeAsset() {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer [] {
-    -0.5, -0.5, -0.5
-    , -0.5,  0.5, -0.5
-    ,  0.5, -0.5, -0.5
-    ,  0.5,  0.5, -0.5
+	
+///cube
+	/*-0.5,0.5,0.5,	//0 ftl    
+	-0.5,-0.5,0.5,	//1 fbl
+	0.5,-0.5,0.5,	//2 fbr
+	0.5,0.5,0.5,	//3 ftr
+	-0.5,0.5,-0.5,	//4 btl
+	-0.5,-0.5,-0.5,	//5 bbl
+	0.5,-0.5,-0.5,	//6 bbr
+	0.5,0.5,-0.5	//7 btr
+*/
+
+
+// rotated square / diamond
+/*	0.0,0.5,0.5,
+	0.5,0.0,0.5,
+	0.0,-0.5,0.5,
+	-0.5,0.0,0.5
+*/
+	
+//star shape
+		0.0,1,0.5,
+	-0.25,0.25,0.5,
+	0.25,0.25,0.5,
+	-1,0.0,0.5,
+	0.0,0.0,0.5,
+	1,0.0,0.5,
+	-0.25,-0.25,0.5,
+0.25,-0.25,0.5,
+0.0,-1,0.5
+
+
   };
 
-  element_buffer_length = 6;
+  element_buffer_length = 24;
   GLuint element_buffer []  {
-    0, 1, 2
-    , 1, 3, 2
+ /*  //cube
+	0,1,2, //Front
+	0,3,2,
+
+	3,2,6, //Right side
+	3,7,6,
+
+	0,1,5, //Left side
+	0,4,5,
+
+	4,5,7, //Back
+	4,7,6,
+
+	0,3,4, //Top
+	4,3,7,
+
+	1,2,5, //Bottom
+	2,6,5
+*/
+
+//star
+0,1,2,
+1,4,2,
+ 
+2,4,7,
+5,2,7,
+
+1,4,6,
+1,6,3,
+
+4,6,7 ,
+7,6,8 
   };
 
   // Transfer buffers to the GPU
@@ -23,7 +82,7 @@ CubeAsset::CubeAsset() {
 
   // immediately bind the buffer and transfer the data
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, vertex_buffer, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 27, vertex_buffer, GL_STATIC_DRAW);
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);

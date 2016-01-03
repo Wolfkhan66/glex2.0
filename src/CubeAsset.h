@@ -15,9 +15,12 @@ class CubeAsset : public GameAsset
 		~CubeAsset();
 		virtual void Draw(GLuint);
 
+		float random();
+
 	private:
-		GLuint element_buffer_length, vertex_buffer_length;
-		GLuint vertex_buffer_token, element_buffer_token;
+		GLuint element_buffer_length, vertex_buffer_length, color_buffer_length;
+		GLuint vertex_buffer_token, element_buffer_token, color_buffer_token;
+
 };
 
 #endif // CUBEASSET_H

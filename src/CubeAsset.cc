@@ -35,6 +35,20 @@ CubeAsset::CubeAsset(GLfloat posX, GLfloat posY, GLfloat posZ)
 	};
 	vertex_buffer_length = sizeof(vertex_buffer);
 
+	GLfloat color_buffer[] = {
+		random(), random(), random(),
+		random(), random(), random(),
+		random(), random(), random(),
+		random(), random(), random(),
+		random(), random(), random(),
+		random(), random(), random(),
+		random(), random(), random(),
+		random(), random(), random()
+	};
+
+color_buffer_length = sizeof(color_buffer);
+
+
 	GLuint element_buffer []  {
 			
 			
@@ -80,6 +94,12 @@ CubeAsset::CubeAsset(GLfloat posX, GLfloat posY, GLfloat posZ)
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
 	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_length, vertex_buffer, GL_STATIC_DRAW);
 
+//GLfloats for colours
+	glGenBuffers(1, &color_buffer_token);
+	glBindBuffer(GL_ARRAY_BUFFER, color_buffer_token);
+	glBufferData(GL_ARRAY_BUFFER, color_buffer_length, color_buffer, GL_STATIC_DRAW);
+
+
 	glGenBuffers(1, &element_buffer_token);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, element_buffer_length, element_buffer, GL_STATIC_DRAW);
@@ -104,6 +124,15 @@ void checkError(std::string file, int line)
 		exit(-1);
 	}
 }
+
+
+
+float CubeAsset::random(){
+	float a = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	return a;
+}
+
+
 
 void CubeAsset::Draw(GLuint program_token)
 {
@@ -154,6 +183,18 @@ void CubeAsset::Draw(GLuint program_token)
 	);
 	
 	glEnableVertexAttribArray(position_attrib);
+	checkGLError();
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, color_buffer_token);
+	glVertexAttribPointer(
+		1,				/* attribute */
+		3,				/* size */
+		GL_FLOAT,		/* type */
+		GL_FALSE,		/* normalized? */
+		0,				/* stride */
+		(void*)0		/* array buffer offset */
+	);
 	checkGLError();
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);

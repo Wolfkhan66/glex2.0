@@ -13,6 +13,7 @@ class CubeAsset : public GameAsset
 	public:
 		CubeAsset(GLfloat posX, GLfloat posY, GLfloat posZ);
 		~CubeAsset();
+
 		virtual void Draw(GLuint);
 
 		float random();

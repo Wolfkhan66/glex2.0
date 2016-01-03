@@ -25,8 +25,12 @@ mat4 translate(float x, float y, float z)
 	);
 }
 
+uniform mat4 cam_proj;
+uniform mat4 cam_view;
+uniform mat4 cam_mod;
+
 void main()
 {
-	gl_Position = projection(radians(45.0), 4.0/3.0, -0.1, -1000.0) * translate(0.0, 0.0, -5.0) * vec4(position, 1.0f);
+	gl_Position = (cam_proj * cam_view * cam_mod) * vec4(position, 1);
 	frag_color = vec3(1.0, 1.0, 1.0); 
 }

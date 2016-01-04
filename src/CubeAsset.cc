@@ -14,7 +14,7 @@ CubeAsset::CubeAsset() {
   };
 
   element_buffer_length = 36;
-  GLuint vertex_buffer []  {
+  GLuint element_buffer []  {
   
  //cube
 	0,1,2, //Front
@@ -49,7 +49,7 @@ CubeAsset::CubeAsset() {
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, vertex_buffer, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, element_buffer, GL_STATIC_DRAW);
 }
 
 CubeAsset::~CubeAsset() {

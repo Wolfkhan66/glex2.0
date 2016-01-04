@@ -50,6 +50,8 @@ CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, element_buffer, GL_STATIC_DRAW);
+  
+  AType = CUBE;
 }
 
 CubeAsset::~CubeAsset() {
@@ -126,3 +128,8 @@ void CubeAsset::Draw(GLuint program_token) {
 
   glDisableVertexAttribArray(position_attrib);
 }
+
+GameAsset::AType CubeAsset::GetAType(){
+
+	return aType;
+	}

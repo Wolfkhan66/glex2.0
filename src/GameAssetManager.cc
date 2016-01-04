@@ -41,8 +41,12 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
 
-    ga->Draw(program_token_red);
-  }
+   if(ga->GetAType() == GameAsset::CUBE){
+    	 ga->Draw(program_token_red);
+     }else if(ga->GetAType() == GameAsset::STAR){
+    	 ga->Draw(program_token_white);
+     }
+}
 }
 
 /**

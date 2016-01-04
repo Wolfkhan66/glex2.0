@@ -17,6 +17,7 @@ class StarAsset : public GameAsset {
   StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ);
   ~StarAsset();
   virtual void Draw(GLuint);
+  virtual AType GetAType();
 
 
  private:

@@ -11,13 +11,13 @@
 
 class CubeAsset : public GameAsset {
  public:
-  CubeAsset(glm::vec3);
+  CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ);
   ~CubeAsset();
   virtual void Draw(GLuint);
-	glm::vec3 GetVec3();
+
 
  private:
-	glm::vec3 position;
+
   GLuint element_buffer_length;
   GLuint vertex_buffer_token, element_buffer_token;
 };

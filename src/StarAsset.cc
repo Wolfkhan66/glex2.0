@@ -1,18 +1,18 @@
 #include "StarAsset.h"
 
-StarAsset::StarAsset(vec3 position) {
+StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
 
-		0.0   + position.x, 1     + position.y, 0.5 + position.z,
-		-0.25 + position.x, 0.25  + position.y, 0.5 + position.z,
-		0.25  + position.x, 0.25  + position.y, 0.5 + position.z,
-		-1    + position.x, 0.0   + position.y, 0.5 + position.z,
-		0.0   + position.x, 0.0   + position.y, 0.5 + position.z,
-		1     + position.x, 0.0   + position.y, 0.5 + position.z,
-		-0.25 + position.x, -0.25 + position.y, 0.5 + position.z,
-		0.25  + position.x, -0.25 + position.y, 0.5 + position.z,
-		0.0   + position.x, -1    + position.y, 0.5 + position.z
+		0.0   + positionX, 1     + positionY, 0.5 + positionZ,
+		-0.25 + positionX, 0.25  + positionY, 0.5 + positionZ,
+		0.25  + positionX, 0.25  + positionY, 0.5 + positionZ,
+		-1    + positionX, 0.0   + positionY, 0.5 + positionZ,
+		0.0   + positionX, 0.0   + positionY, 0.5 + positionZ,
+		1     + positionX, 0.0   + positionY, 0.5 + positionZ,
+		-0.25 + positionX, -0.25 + positionY, 0.5 + positionZ,
+		0.25  + positionX, -0.25 + positionY, 0.5 + positionZ,
+		0.0   + positionX, -1    + positionY, 0.5 + positionZ
   };
 
   element_buffer_length = 36;

@@ -1,0 +1,15 @@
+language: cpp
+compiler:
+-gcc
+
+before_install:
+yum install boost-* glew-devel SDL2 *glm-devel
+
+brances:
+only:
+- master
+
+os:
+- linux
+
+sudo: true

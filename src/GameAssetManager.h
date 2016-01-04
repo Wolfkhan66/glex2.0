@@ -7,6 +7,7 @@
 #include <utility>
 #include <fstream>
 #include <iostream>
+
 #include <GL/gl.h>
 
 #include "common.h"
@@ -18,27 +19,24 @@
  * simple GameAsset.
  */
 class GameAssetManager {
-	public:
-		explicit GameAssetManager(ApplicationMode); 	// constructor
-		virtual ~GameAssetManager();
+ public:
+  explicit GameAssetManager(ApplicationMode); // constructor
+  virtual ~GameAssetManager();
+  GameAssetManager(GameAssetManager const&); // copy constructor
+  GameAssetManager(GameAssetManager const&&); // move constructor
+  void operator=(GameAssetManager const&); // assignment
+  void AddAsset(std::shared_ptr<GameAsset>);
+  void Draw();
 
-		GameAssetManager(GameAssetManager const&); 		// copy constructor
-		GameAssetManager(GameAssetManager const&&); 	// move constructor
+ private:
+  GLuint CreateGLProgram(std::string &, std::string &);
+  GLuint CreateGLESShader(GLenum, std::string &);
+  // As this is private and we're writing to the GPU, we will use raw pointers.
+  std::pair<GLchar *, GLint>  ReadShader(std::string &);
 
-		void operator=(GameAssetManager const&); 		// assignment
-		void AddAsset(std::shared_ptr<GameAsset>);
-		void Draw();
-
-	private:
-		GLuint CreateGLProgram(std::string &, std::string &);
-		GLuint CreateGLESShader(GLenum, std::string &);
-
-		// As this is private and we're writing to the GPU, we will use raw pointers.
-		std::pair<GLchar *, GLint>  ReadShader(std::string &);
-
-		// The internal scene graph is a simple list.
-		std::vector<std::shared_ptr<GameAsset>> draw_list;
-		GLuint program_token;
+  // The internal scene graph is a simple list.
+  std::vector<std::shared_ptr<GameAsset>> draw_list;
+  GLuint program_token;
 };
 
 #endif // GAMEASSETMANAGER_H

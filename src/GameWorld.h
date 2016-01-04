@@ -2,10 +2,8 @@
 #define GAMEWORLD_H
 
 #include <memory>
+
 #include <GL/gl.h>
-#include <glm/glm.hpp>
-#include <glm/ext.hpp>
-#include <math.h>
 
 #include "common.h"
 #include "GameAssetManager.h"
@@ -17,37 +15,19 @@
  * a very simplified scene graph consisiting of a single GameAssetManager.
  */
 class GameWorld {
-	public:
-		/**
-		* We thread the ApplicationMode through the GameWorld ss we want to read it
-		* in from the user.  Threading the state through the various function calls
-		* is preferable (in this case) to having some kind of global state.
-		*/
-		GameWorld(ApplicationMode);
+ public:
+  /**
+   * We thread the ApplicationMode through the GameWorld ss we want to read it
+   * in from the user.  Threading the state through the various function calls
+   * is preferable (in this case) to having some kind of global state.
+   */
+  GameWorld(ApplicationMode);
 
-		/**
-		* Calling Draw() will draw the entire world.
-		*/
-		void Draw();
-
-		/**
-		* Camera Handling
-		*/
-		void Camera(int a);
-		void Action(int x);
-	
-
-	private:
-		std::shared_ptr<GameAssetManager> asset_manager;
-
-		GLfloat camera_speed = 0.1;
-
-		GLfloat camera_x = 0.0;
-		GLfloat camera_y = 0.0;
-
-		glm::vec3 position = glm::vec3(0, 0, 0);
-		glm::vec3 z_direction;
-		glm::vec3 x_direction;
+  /**
+   * Calling Draw() will draw the entire world.
+   */
+  void Draw();
+ private:
+  std::shared_ptr<GameAssetManager> asset_manager;
 };
-
 #endif // GAMEWORLD_H

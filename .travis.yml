@@ -1,11 +1,12 @@
 language: cpp
 compiler:
--gcc
+- gcc
 
 before_install:
-yum install boost-* glew-devel SDL2 *glm-devel
-
-brances:
+ - sudo apt-get update -qq
+ - sudo apt-get install -y libsdl-* libglm-dev libboost-all-dev
+ 
+branches:
 only:
 - master
 

@@ -1,9 +1,13 @@
 #include "GameWorld.h"
 
 GameWorld::GameWorld (ApplicationMode mode) {
+
+
   asset_manager = std::make_shared<GameAssetManager>(mode);
-  asset_manager->AddAsset(std::make_shared<CubeAsset>());
-asset_manager->AddAsset(std::make_shared<StarAsset>());
+
+
+  asset_manager->AddAsset(std::make_shared<CubeAsset>(glm::vec3(1000.0, 0.0, 0.0)));
+  asset_manager->AddAsset(std::make_shared<StarAsset>(glm::vec3(1000.0, 0.0, 0.0)));
 }
 
 void GameWorld::Draw() {

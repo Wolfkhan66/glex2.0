@@ -1,16 +1,16 @@
 #include "CubeAsset.h"
 
-CubeAsset::CubeAsset() {
+CubeAsset::CubeAsset(vec3 position) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
-  -0.5,0.5,0.5, 	//0 ftl    
-	-0.5,-0.5,0.5,	//1 fbl
-	 0.5,-0.5,0.5,	//2 fbr
-	 0.5,0.5,0.5, 	//3 ftr
-  -0.5,0.5,-0.5,	//4 btl
-  -0.5,-0.5,-0.5,	//5 bbl
-	 0.5,-0.5,-0.5,	//6 bbr
-	 0.5,0.5,-0.5	  //7 btr
+  -0.5 + position.x,0.5 + position.y,0.5 + position.z, 	//0 ftl    
+	-0.5 + position.x,-0.5 + position.y,0.5 + position.z,	//1 fbl
+	 0.5 + position.x,-0.5 + position.y,0.5 + position.z,	//2 fbr
+	 0.5 + position.x,0.5 + position.y,0.5 + position.z, 	//3 ftr
+  -0.5 + position.x,0.5 + position.y,-0.5 + position.z,	//4 btl
+  -0.5 + position.x,-0.5 + position.y,-0.5 + position.z,	//5 bbl
+	 0.5 + position.x,-0.5 + position.y,-0.5 + position.z,	//6 bbr
+	 0.5 + position.x,0.5 + position.y,-0.5	 + position.z  //7 btr
   };
 
   element_buffer_length = 36;

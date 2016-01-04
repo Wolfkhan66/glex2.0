@@ -9,6 +9,9 @@
 
 #include "GameAsset.h"
 
+
+using namespace std;
+
 class StarAsset : public GameAsset {
  public:
   StarAsset();
@@ -18,6 +21,7 @@ class StarAsset : public GameAsset {
  private:
   GLuint element_buffer_length;
   GLuint vertex_buffer_token, element_buffer_token;
+  void checkError(string file, int line);
 };
 
 #endif // STARASSET_H

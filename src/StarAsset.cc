@@ -56,7 +56,7 @@ StarAsset::~StarAsset() {
 #define checkGLError()
 #endif
 
-void checkError(std::string file, int line) {
+void StarAsset::checkError(std::string file, int line) {
   GLenum gl_error = glGetError();
   if(GL_NO_ERROR != gl_error) {
     std::cerr << "GL error in " << file << " at line " << line << " error: " << gl_error << std::endl;

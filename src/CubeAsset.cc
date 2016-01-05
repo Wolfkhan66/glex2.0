@@ -3,14 +3,14 @@
 CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
-        -0.5f + positionX,0.5f + positionY,0.5f + positionZ, 	//0 ftl    
-	-0.5f + positionX,-0.5f + positionY,0.5f + positionZ,	//1 fbl
-	 0.5f + positionX,-0.5f + positionY,0.5f + positionZ,	//2 fbr
-	 0.5f + positionX,0.5f + positionY,0.5f + positionZ, 	//3 ftr
-        -0.5f + positionX,0.5f + positionY,-0.5f + positionZ,	//4 btl
-        -0.5f + positionX,-0.5f + positionY,-0.5f + positionZ,	//5 bbl
-	 0.5f + positionX,-0.5f + positionY,-0.5f + positionZ,	//6 bbr
-	 0.5f + positionX,0.5f + positionY,-0.5f	 + positionZ  //7 btr
+        -0.5f + positionX,0.5f  + positionY,0.5f   + positionZ, 	//0 ftl    
+	-0.5f + positionX,-0.5f + positionY,0.5f   + positionZ,	//1 fbl
+	 0.5f + positionX,-0.5f + positionY,0.5f   + positionZ,	//2 fbr
+	 0.5f + positionX,0.5f  + positionY,0.5f   + positionZ, 	//3 ftr
+        -0.5f + positionX,0.5f  + positionY,-0.5f  + positionZ,	//4 btl
+        -0.5f + positionX,-0.5f + positionY,-0.5f  + positionZ,	//5 bbl
+	 0.5f + positionX,-0.5f + positionY,-0.5f  + positionZ,	//6 bbr
+	 0.5f + positionX,0.5f  + positionY,-0.5f  + positionZ  //7 btr
   };
 
   element_buffer_length = 36;

@@ -146,6 +146,7 @@ int main(int argc, char ** argv) {
 
 	int mouseX;
 	int mouseY;
+	const Uint8 *keyboard_state;
 	Input input_direction = NILL;
   if(!window) {
     SDL_Quit();
@@ -158,58 +159,35 @@ int main(int argc, char ** argv) {
    SDL_Event event;
    while (SDL_WaitEvent(&event)) {
 
-	SDL_GetMouseState(&mouseX, &mouseY);
  
      switch (event.type) {
      case SDL_QUIT:
        SDL_Quit();
        break;
      case SDL_USEREVENT:
+{
+   SDL_GetMouseState(&mouseX, &mouseY);
+
+    	keyboard_state = SDL_GetKeyboardState(NULL);
+    	if(keyboard_state[SDL_SCANCODE_A]){
+    		input_direction = LEFT;
+   	}else if(keyboard_state[SDL_SCANCODE_S]){
+   		input_direction = DOWN;
+    	}else if(keyboard_state[SDL_SCANCODE_D]){
+    		input_direction = RIGHT;
+    	}else if(keyboard_state[SDL_SCANCODE_W]){
+    		input_direction = UP;
+    	}else{
+    		input_direction = NILL;
+    	}
+
+      game_world->UpdateCameraPosition(input_direction, mouseX, mouseY);
        Draw(window, game_world);
        break;
-     case SDL_KEYDOWN:
- 
-//based on https://www.libsdl.org/release/SDL-1.2.15/docs/html/guideinputkeyboard.html
-
-       switch(event.key.keysym.sym){
-       case SDLK_a:
-   	  input_direction = LEFT;
-     	  break;
-       case SDLK_s:
-    	  input_direction = DOWN;
-     	  break;
-       case SDLK_d:
-    	  input_direction = RIGHT;
-     	  break;
-       case SDLK_w:
-   	  input_direction = UP;
-
-     	  break;
- 
-       }
-       break;
- 
-     //Detect key release events.
-     case SDL_KEYUP:
-       switch(event.key.keysym.sym){
-       case SDLK_a:
-input_direction = NILL;
-     	  break;
-       case SDLK_s:
-input_direction = NILL;
-     	  break;
-       case SDLK_d:
-input_direction = NILL;
-     	  break;
-       case SDLK_w:
-input_direction = NILL;
-     	  break;
-       }
-       break;
+	}
  
      default:
        break;
      }
- game_world->UpdateCameraPosition(input_direction, mouseX, mouseY);
    }
  }

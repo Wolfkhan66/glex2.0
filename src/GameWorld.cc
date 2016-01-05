@@ -5,8 +5,21 @@ GameWorld::GameWorld (ApplicationMode mode) {
 
   asset_manager = std::make_shared<GameAssetManager>(mode);
 
-asset_manager->AddAsset(std::make_shared<CubeAsset>(1.0, 0.0, 0.0));
-asset_manager->AddAsset(std::make_shared<StarAsset>(-1.0, 0.0, 0.0));
+	for(int i = 1; i < 6; i++)
+	{
+
+		
+	asset_manager->AddAsset(std::make_shared<CubeAsset>(2.0* i, 0.0, 10.0));
+		
+	}
+		
+
+	for(int i = 1; i < 6; i++)
+	{
+
+	asset_manager->AddAsset(std::make_shared<StarAsset>(-2.0* i, 0.0, 10.0));
+		
+	}
 }
 
 void GameWorld::Draw() {

@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include <GL/gl.h>
+#include <glm/ext.hpp>
 
 #include "common.h"
 #include "GameAsset.h"
@@ -27,7 +28,7 @@ class GameAssetManager {
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
   void Draw();
-void UpdateCameraPosition(Input);
+void UpdateCameraPosition(Input, int mouseX, int mouseY);
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);
@@ -40,6 +41,15 @@ void UpdateCameraPosition(Input);
   GLuint program_token;
 
 
+// variables to communicate with the shader(Camera)
+
+  float horizontalAngle;
+  float verticalAngle;
+  GLuint translateMatrix_link;
+  GLuint viewMatrix_link;
+
+  glm::mat4 translateMatrix; 
+  glm::mat4 viewMatrix;	
 
    GLuint cameraPositionX;
    GLuint cameraPositionY;

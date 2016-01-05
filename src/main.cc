@@ -143,6 +143,10 @@ int main(int argc, char ** argv) {
   auto mode = ParseOptions(argc, argv);
   auto window = InitWorld();
   auto game_world = std::make_shared<GameWorld>(mode);
+
+	int mouseX;
+	int mouseY;
+	Input input_direction = NILL;
   if(!window) {
     SDL_Quit();
   }
@@ -153,6 +157,8 @@ int main(int argc, char ** argv) {
    // Add the main event loop
    SDL_Event event;
    while (SDL_WaitEvent(&event)) {
+
+	SDL_GetMouseState(&mouseX, &mouseY);
  
      switch (event.type) {
      case SDL_QUIT:
@@ -167,16 +173,16 @@ int main(int argc, char ** argv) {
 
        switch(event.key.keysym.sym){
        case SDLK_a:
-   	  game_world->UpdateCameraPosition(Input::LEFT);
+   	  input_direction = LEFT;
      	  break;
        case SDLK_s:
-    	  game_world->UpdateCameraPosition(Input::DOWN);
+    	  input_direction = DOWN;
      	  break;
        case SDLK_d:
-    	  game_world->UpdateCameraPosition(Input::RIGHT);
+    	  input_direction = RIGHT;
      	  break;
        case SDLK_w:
-   	   game_world->UpdateCameraPosition(Input::UP);
+   	  input_direction = UP;
 
      	  break;
  
@@ -187,12 +193,16 @@ int main(int argc, char ** argv) {
      case SDL_KEYUP:
        switch(event.key.keysym.sym){
        case SDLK_a:
+input_direction = NILL;
      	  break;
        case SDLK_s:
+input_direction = NILL;
      	  break;
        case SDLK_d:
+input_direction = NILL;
      	  break;
        case SDLK_w:
+input_direction = NILL;
      	  break;
        }
        break;
@@ -200,5 +210,6 @@ int main(int argc, char ** argv) {
      default:
        break;
      }
+ game_world->UpdateCameraPosition(input_direction, mouseX, mouseY);
    }
  }

@@ -30,7 +30,7 @@ class GameWorld {
   void Draw();
 
 
-void UpdateCameraPosition(Input);
+void UpdateCameraPosition(Input, int mouseX, int mouseY);
 
 
  private:

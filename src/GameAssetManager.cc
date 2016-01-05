@@ -22,33 +22,44 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
 
-  cameraPositionX = glGetUniformLocation(program_token, "cameraPositionX");
-  cameraPositionZ = glGetUniformLocation(program_token, "cameraPositionZ");
+ translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
+viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
 
   playerPositionX = 0.0f;
   playerPositionZ=  0.0f;
 
- glUniform1f(cameraPositionZ, playerPositionZ);
+ translateMatrix = {0.0, 0.0, 0.0, 1.0,
+	                   0.0, 0.0, 1.0, 0.0,
+		                 0.0, 1.0, 0.0, 0.0,
+			               1.0, 0.0, 0.0, 0.0
+                     };
 
 }
 
 
-void GameAssetManager::UpdateCameraPosition(Input inputDirection){
+void GameAssetManager::UpdateCameraPosition(Input inputDirection,  int mouseX, int mouseY){
 
 
   if(inputDirection == UP){
 	  playerPositionZ += 0.5;
-	  glUniform1f(cameraPositionZ, playerPositionZ);
   }else if(inputDirection == DOWN){
  	  playerPositionZ -= 0.5;
- 	  glUniform1f(cameraPositionZ, playerPositionZ);
   }else if(inputDirection == LEFT){
 	  playerPositionX += 0.5;
-	  glUniform1f(cameraPositionX, playerPositionX);
   }else if(inputDirection == RIGHT){
 	  playerPositionX -= 0.5;
-	  glUniform1f(cameraPositionX, playerPositionX);
    }
+
+	horizontalAngle += 2 * float(640/2 - mouseX);
+	verticalAngle += 2 * float(480/2 - mouseY);
+
+     viewMatrix = glm::lookAt(glm::vec3(playerPositionX, 0.0f, playerPositionZ),
+	                    glm::vec3(cos(verticalAngle * sin(horizontalAngle)), sin(verticalAngle), cos(verticalAngle) * cos(horizontalAngle)),
+ 	
+							glm::vec3(0.0f, 1.0f, 0.0f));
+
+              glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+
   }
 /**
  * Deletes a GameAssetManager, in particular it will clean up any modifications
@@ -56,30 +67,6 @@ void GameAssetManager::UpdateCameraPosition(Input inputDirection){
  */
 GameAssetManager::~GameAssetManager() {
   glDeleteProgram(program_token);
-}
-
-/**
- * Unimplemented copy constructor -- this means that the GameAssetManager
- * may not work as you'd expect when being copied.
- */
-GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
-  // TODO: implement this
-}
-
-/**
- * Unimplemented move constructor -- this unimplemented method violates the
- * C++11 move semantics for GameAssetManager.
- */
-GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
-  // TODO: implement this
-}
-
-/**
- * Unimplemented assisgnment operator -- violates the expected semantics for
- * assignment in C++11.
- */
-void GameAssetManager::operator=(GameAssetManager const& the_manager) {
-  // TODO: implement this
 }
 
 /**
@@ -94,6 +81,13 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  */
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
+
+viewMatrix = glm::lookAt(glm::vec3(playerPositionX, 0.0f, playerPositionZ),
+ 		           glm::vec3(playerPositionX, 0.0f, playerPositionZ + 2),
+ 					     glm::vec3(0.0f, 1.0f, 0.0f));
+
+               glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+
     ga->Draw(program_token);
   }
 }
@@ -191,3 +185,28 @@ std::pair<GLchar *, GLint> GameAssetManager::ReadShader(std::string & shader) {
   input_file.close();
   return std::make_pair(buffer, length);
 }
+
+/**
+ * Unimplemented copy constructor -- this means that the GameAssetManager
+ * may not work as you'd expect when being copied.
+ */
+GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
+  // TODO: implement this
+}
+
+/**
+ * Unimplemented move constructor -- this unimplemented method violates the
+ * C++11 move semantics for GameAssetManager.
+ */
+GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
+  // TODO: implement this
+}
+
+/**
+ * Unimplemented assisgnment operator -- violates the expected semantics for
+ * assignment in C++11.
+ */
+void GameAssetManager::operator=(GameAssetManager const& the_manager) {
+  // TODO: implement this
+}
+

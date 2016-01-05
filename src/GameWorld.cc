@@ -13,7 +13,8 @@ void GameWorld::Draw() {
   asset_manager->Draw();
 }
 
-void GameWorld::UpdateCameraPosition(Input input_direction){
-asset_manager->UpdateCameraPosition(input_direction);
+void GameWorld::UpdateCameraPosition(Input input_direction, int mouseX, int mouseY){
+
+asset_manager->UpdateCameraPosition(input_direction,  mouseX,  mouseY);
 
 }

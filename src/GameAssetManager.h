@@ -29,29 +29,30 @@ class GameAssetManager {
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
   void Draw();
-  void UpdateCameraPosition(Input, int mouseX, int mouseY);
+void UpdateCameraPosition(Input, int mouseX, int mouseY);
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);
   GLuint CreateGLESShader(GLenum, std::string &);
   // As this is private and we're writing to the GPU, we will use raw pointers.
   std::pair<GLchar *, GLint>  ReadShader(std::string &);
-	 std::vector<std::shared_ptr<GameAsset>> draw_list;
-  Camera camera;
-  GLuint program_token;
 
+  // The internal scene graph is a simple list.
+  std::vector<std::shared_ptr<GameAsset>> draw_list;
+  GLuint program_token;
+Camera camera;
 
 // variables to communicate with the shader(Camera)
 
+
   GLuint translateMatrix_link;
   GLuint viewMatrix_link;
-  GLuint projectionMatrix_link;
 
-  glm::mat4 projectionMatrix;
   glm::mat4 translateMatrix; 
   glm::mat4 viewMatrix;	
 
    GLuint cameraPositionX;
+
    GLuint cameraPositionZ;
 
 

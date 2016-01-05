@@ -1,17 +1,12 @@
 #include "GameAssetManager.h"
-#include <glm/glm.hpp>
-#include <glm/ext.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-using namespace std;
 
 /**
  * Creates a GameAssetManager to load the correct shaders based on the
  * ApplicationMode.
  */
 GameAssetManager::GameAssetManager(ApplicationMode mode) {
-  string vertex_shader("shaders/translate.vs");
-  string fragment_shader("shaders/fragment.fs");
+  std::string vertex_shader("shaders/translate.vs");
+  std::string fragment_shader("shaders/fragment.fs");
 
   switch(mode) {
   case ROTATE:
@@ -27,23 +22,18 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
 
- projectionMatrix_link = glGetUniformLocation(program_token, "projection_matrix");
  translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
- viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
-
-projectionMatrix = glm::perspective(glm::radians(45.0f), (float) 640 / (float) 480, 0.1f, 1000.0f);
+viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
 
 }
 
 
-void GameAssetManager::UpdateCameraPosition(Input inputDirection,  int mouseX, int mouseY){
+void GameAssetManager::UpdateCameraPosition(Input input_Direction,  int mouseX, int mouseY){
 
 
- viewMatrix = camera.UpdateCameraPosition(inputDirection, mouseX, mouseY);
+ viewMatrix = camera.UpdateCameraPosition(input_Direction, mouseX, mouseY);
 
   }
-
-
 /**
  * Deletes a GameAssetManager, in particular it will clean up any modifications
  * to the OpenGL state.
@@ -64,11 +54,11 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  */
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
+	glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
 
-glUniformMatrix4fv(projectionMatrix_link, 1, GL_FALSE, &projectionMatrix[0][0]);
- 	glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+        			glUniformMatrix4fv(translateMatrix_link, 1, GL_FALSE, &translateMatrix[0][0]);
+
     ga->Draw(program_token);
-
   }
 }
 

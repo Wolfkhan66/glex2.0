@@ -6,8 +6,7 @@
  */
 GameAssetManager::GameAssetManager(ApplicationMode mode) {
   std::string vertex_shader("shaders/translate.vs");
-  std::string fragment_shader_red("shaders/fragmentRed.fs");
-  std::string fragment_shader_white("shaders/fragmentWhite.fs");
+  std::string fragment_shader("shaders/fragment.fs");
 
   switch(mode) {
   case ROTATE:
@@ -21,18 +20,73 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
     break;
   };
 
-  program_token_red = CreateGLProgram(vertex_shader, fragment_shader_red);
- program_token_white = CreateGLProgram(vertex_shader, fragment_shader_white);
+  program_token = CreateGLProgram(vertex_shader, fragment_shader);
+
+  cameraPositionX = glGetUniformLocation(program_token, "cameraPositionX");
+  cameraPositionZ = glGetUniformLocation(program_token, "cameraPositionZ");
+
+  playerPositionX = 0.0f;
+  playerPositionZ=  0.0f;
+
+ glUniform1f(cameraPositionZ, playerPositionZ);
+
 }
 
+
+void GameAssetManager::UpdateCameraPosition(Input inputDirection){
+
+
+  if(inputDirection == UP){
+	  playerPositionZ += 0.5;
+	  glUniform1f(cameraPositionZ, playerPositionZ);
+  }else if(inputDirection == DOWN){
+ 	  playerPositionZ -= 0.5;
+ 	  glUniform1f(cameraPositionZ, playerPositionZ);
+  }else if(inputDirection == LEFT){
+	  playerPositionX += 0.5;
+	  glUniform1f(cameraPositionX, playerPositionX);
+  }else if(inputDirection == RIGHT){
+	  playerPositionX -= 0.5;
+	  glUniform1f(cameraPositionX, playerPositionX);
+   }
+  }
+/**
+ * Deletes a GameAssetManager, in particular it will clean up any modifications
+ * to the OpenGL state.
+ */
+GameAssetManager::~GameAssetManager() {
+  glDeleteProgram(program_token);
+}
+
+/**
+ * Unimplemented copy constructor -- this means that the GameAssetManager
+ * may not work as you'd expect when being copied.
+ */
+GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
+  // TODO: implement this
+}
+
+/**
+ * Unimplemented move constructor -- this unimplemented method violates the
+ * C++11 move semantics for GameAssetManager.
+ */
+GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
+  // TODO: implement this
+}
+
+/**
+ * Unimplemented assisgnment operator -- violates the expected semantics for
+ * assignment in C++11.
+ */
+void GameAssetManager::operator=(GameAssetManager const& the_manager) {
+  // TODO: implement this
+}
 
 /**
  * Adds a GameAsset to the scene graph.
  */
 void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
-
   draw_list.push_back(the_asset);
-
 }
 
 /**
@@ -40,13 +94,8 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  */
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
-
-   if(ga->GetAType() == GameAsset::CUBE){
-    	 ga->Draw(program_token_red);
-     }else if(ga->GetAType() == GameAsset::STAR){
-    	 ga->Draw(program_token_white);
-     }
-}
+    ga->Draw(program_token);
+  }
 }
 
 /**
@@ -114,7 +163,6 @@ GLuint GameAssetManager::CreateGLESShader(GLenum type, std::string & shader) {
     }
 
     glDeleteShader(shader_token); //Don't leak the shader.
-
     exit(-1);
   }
   return shader_token;
@@ -143,37 +191,3 @@ std::pair<GLchar *, GLint> GameAssetManager::ReadShader(std::string & shader) {
   input_file.close();
   return std::make_pair(buffer, length);
 }
-
-/**
- * Deletes a GameAssetManager, in particular it will clean up any modifications
- * to the OpenGL state.
- */
-GameAssetManager::~GameAssetManager() {
-  glDeleteProgram(program_token_red);
-  glDeleteProgram(program_token_white);
-}
-
-/**
- * Unimplemented copy constructor -- this means that the GameAssetManager
- * may not work as you'd expect when being copied.
- */
-GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
-  // TODO: implement this
-}
-
-/**
- * Unimplemented move constructor -- this unimplemented method violates the
- * C++11 move semantics for GameAssetManager.
- */
-GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
-  // TODO: implement this
-}
-
-/**
- * Unimplemented assisgnment operator -- violates the expected semantics for
- * assignment in C++11.
- */
-void GameAssetManager::operator=(GameAssetManager const& the_manager) {
-  // TODO: implement this
-}
-

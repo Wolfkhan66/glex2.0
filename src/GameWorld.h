@@ -9,7 +9,6 @@
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
 #include "StarAsset.h"
-#include "GameAsset.h"
 
 /**
  * GameWorld allows us to separate the management of the game world from the
@@ -29,6 +28,11 @@ class GameWorld {
    * Calling Draw() will draw the entire world.
    */
   void Draw();
+
+
+void UpdateCameraPosition(Input);
+
+
  private:
   std::shared_ptr<GameAssetManager> asset_manager;
 };

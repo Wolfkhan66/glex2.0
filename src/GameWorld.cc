@@ -12,3 +12,8 @@ asset_manager->AddAsset(std::make_shared<StarAsset>(-1.0, 0.0, 0.0));
 void GameWorld::Draw() {
   asset_manager->Draw();
 }
+
+void GameWorld::UpdateCameraPosition(Input input_direction){
+asset_manager->UpdateCameraPosition(input_direction);
+
+}

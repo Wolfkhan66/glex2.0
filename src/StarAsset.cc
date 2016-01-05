@@ -4,15 +4,15 @@ StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
 
-		0.0   + positionX, 1     + positionY, 0.5 + positionZ,
-		-0.25 + positionX, 0.25  + positionY, 0.5 + positionZ,
-		0.25  + positionX, 0.25  + positionY, 0.5 + positionZ,
-		-1    + positionX, 0.0   + positionY, 0.5 + positionZ,
-		0.0   + positionX, 0.0   + positionY, 0.5 + positionZ,
-		1     + positionX, 0.0   + positionY, 0.5 + positionZ,
-		-0.25 + positionX, -0.25 + positionY, 0.5 + positionZ,
-		0.25  + positionX, -0.25 + positionY, 0.5 + positionZ,
-		0.0   + positionX, -1    + positionY, 0.5 + positionZ
+		0.0f   + positionX, 1.0f     + positionY, 0.5f + positionZ,
+		-0.25f + positionX, 0.25f  + positionY, 0.5f + positionZ,
+		0.25f  + positionX, 0.25f  + positionY, 0.5f + positionZ,
+		-1.0f    + positionX, 0.0f   + positionY, 0.5f + positionZ,
+		0.0f   + positionX, 0.0f   + positionY, 0.5f + positionZ,
+		1.0f     + positionX, 0.0f   + positionY, 0.5f + positionZ,
+		-0.25f + positionX, -0.25f + positionY, 0.5f + positionZ,
+		0.25f  + positionX, -0.25f + positionY, 0.5f + positionZ,
+		0.0f   + positionX, -1.0f    + positionY, 0.5f + positionZ
   };
 
   element_buffer_length = 36;
@@ -44,8 +44,6 @@ StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, element_buffer, GL_STATIC_DRAW);
-
-Type = STAR;
 }
 
 StarAsset::~StarAsset() {
@@ -121,9 +119,4 @@ void StarAsset::Draw(GLuint program_token) {
   checkGLError();
 
   glDisableVertexAttribArray(position_attrib);
-}
-
-GameAsset::AType StarAsset::GetAType{
-
-	return aType;
 }

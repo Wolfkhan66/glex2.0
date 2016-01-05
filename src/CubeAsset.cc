@@ -3,14 +3,14 @@
 CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
-  -0.5 + positionX,0.5 + positionY,0.5 + positionZ, 	//0 ftl    
-	-0.5 + positionX,-0.5 + positionY,0.5 + positionZ,	//1 fbl
-	 0.5 + positionX,-0.5 + positionY,0.5 + positionZ,	//2 fbr
-	 0.5 + positionX,0.5 + positionY,0.5 + positionZ, 	//3 ftr
-  -0.5 + positionX,0.5 + positionY,-0.5 + positionZ,	//4 btl
-  -0.5 + positionX,-0.5 + positionY,-0.5 + positionZ,	//5 bbl
-	 0.5 + positionX,-0.5 + positionY,-0.5 + positionZ,	//6 bbr
-	 0.5 + positionX,0.5 + positionY,-0.5	 + positionZ  //7 btr
+        -0.5f + positionX,0.5f + positionY,0.5f + positionZ, 	//0 ftl    
+	-0.5f + positionX,-0.5f + positionY,0.5f + positionZ,	//1 fbl
+	 0.5f + positionX,-0.5f + positionY,0.5f + positionZ,	//2 fbr
+	 0.5f + positionX,0.5f + positionY,0.5f + positionZ, 	//3 ftr
+        -0.5f + positionX,0.5f + positionY,-0.5f + positionZ,	//4 btl
+        -0.5f + positionX,-0.5f + positionY,-0.5f + positionZ,	//5 bbl
+	 0.5f + positionX,-0.5f + positionY,-0.5f + positionZ,	//6 bbr
+	 0.5f + positionX,0.5f + positionY,-0.5f	 + positionZ  //7 btr
   };
 
   element_buffer_length = 36;
@@ -50,8 +50,6 @@ CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, element_buffer, GL_STATIC_DRAW);
-  
-  AType = CUBE;
 }
 
 CubeAsset::~CubeAsset() {
@@ -128,8 +126,3 @@ void CubeAsset::Draw(GLuint program_token) {
 
   glDisableVertexAttribArray(position_attrib);
 }
-
-GameAsset::AType CubeAsset::GetAType(){
-
-	return aType;
-	}

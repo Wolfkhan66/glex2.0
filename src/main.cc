@@ -150,19 +150,55 @@ int main(int argc, char ** argv) {
   // Call the function "tick" every delay milliseconds
   SDL_AddTimer(delay, tick, NULL);
 
-  // Add the main event loop
-  SDL_Event event;
-  while (SDL_WaitEvent(&event)) {
-    switch (event.type) {
-    case SDL_QUIT:
-      SDL_Quit();
-      break;
-    case SDL_USEREVENT:
-      Draw(window, game_world);
+   // Add the main event loop
+   SDL_Event event;
+   while (SDL_WaitEvent(&event)) {
+ 
+     switch (event.type) {
+     case SDL_QUIT:
+       SDL_Quit();
+       break;
+     case SDL_USEREVENT:
+       Draw(window, game_world);
+       break;
+     case SDL_KEYDOWN:
+ 
+//based on https://www.libsdl.org/release/SDL-1.2.15/docs/html/guideinputkeyboard.html
 
-      break;
-    default:
-      break;
-    }
-  }
-}
+       switch(event.key.keysym.sym){
+       case SDLK_a:
+   	  game_world->UpdateCameraPosition(Input::LEFT);
+     	  break;
+       case SDLK_s:
+    	  game_world->UpdateCameraPosition(Input::DOWN);
+     	  break;
+       case SDLK_d:
+    	  game_world->UpdateCameraPosition(Input::RIGHT);
+     	  break;
+       case SDLK_w:
+   	   game_world->UpdateCameraPosition(Input::UP);
+
+     	  break;
+ 
+       }
+       break;
+ 
+     //Detect key release events.
+     case SDL_KEYUP:
+       switch(event.key.keysym.sym){
+       case SDLK_a:
+     	  break;
+       case SDLK_s:
+     	  break;
+       case SDLK_d:
+     	  break;
+       case SDLK_w:
+     	  break;
+       }
+       break;
+ 
+     default:
+       break;
+     }
+   }
+ }

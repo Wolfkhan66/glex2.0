@@ -1,12 +1,17 @@
 #include "GameAssetManager.h"
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+using namespace std;
 
 /**
  * Creates a GameAssetManager to load the correct shaders based on the
  * ApplicationMode.
  */
 GameAssetManager::GameAssetManager(ApplicationMode mode) {
-  std::string vertex_shader("shaders/translate.vs");
-  std::string fragment_shader("shaders/fragment.fs");
+  string vertex_shader("shaders/translate.vs");
+  string fragment_shader("shaders/fragment.fs");
 
   switch(mode) {
   case ROTATE:
@@ -22,17 +27,11 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
 
+ projectionMatrix_link = glGetUniformLocation(program_token, "projection_matrix");
  translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
-viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
+ viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
 
-  playerPositionX = 0.0f;
-  playerPositionZ=  0.0f;
-
- translateMatrix = {0.0, 0.0, 0.0, 1.0,
-	                   0.0, 0.0, 1.0, 0.0,
-		                 0.0, 1.0, 0.0, 0.0,
-			               1.0, 0.0, 0.0, 0.0
-                     };
+projectionMatrix = glm::perspective(glm::radians(45.0f), (float) 640 / (float) 480, 0.1f, 1000.0f);
 
 }
 
@@ -40,27 +39,11 @@ viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
 void GameAssetManager::UpdateCameraPosition(Input inputDirection,  int mouseX, int mouseY){
 
 
-  if(inputDirection == UP){
-	  playerPositionZ += 0.5;
-  }else if(inputDirection == DOWN){
- 	  playerPositionZ -= 0.5;
-  }else if(inputDirection == LEFT){
-	  playerPositionX += 0.5;
-  }else if(inputDirection == RIGHT){
-	  playerPositionX -= 0.5;
-   }
-
-	horizontalAngle += 2 * float(640/2 - mouseX);
-	verticalAngle += 2 * float(480/2 - mouseY);
-
-     viewMatrix = glm::lookAt(glm::vec3(playerPositionX, 0.0f, playerPositionZ),
-	                    glm::vec3(cos(verticalAngle * sin(horizontalAngle)), sin(verticalAngle), cos(verticalAngle) * cos(horizontalAngle)),
- 	
-							glm::vec3(0.0f, 1.0f, 0.0f));
-
-              glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+ viewMatrix = camera.UpdateCameraPosition(inputDirection, mouseX, mouseY);
 
   }
+
+
 /**
  * Deletes a GameAssetManager, in particular it will clean up any modifications
  * to the OpenGL state.
@@ -82,13 +65,10 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
 
-viewMatrix = glm::lookAt(glm::vec3(playerPositionX, 0.0f, playerPositionZ),
- 		           glm::vec3(playerPositionX, 0.0f, playerPositionZ + 2),
- 					     glm::vec3(0.0f, 1.0f, 0.0f));
-
-               glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
-
+glUniformMatrix4fv(projectionMatrix_link, 1, GL_FALSE, &projectionMatrix[0][0]);
+ 	glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
     ga->Draw(program_token);
+
   }
 }
 

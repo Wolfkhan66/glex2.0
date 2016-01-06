@@ -47,9 +47,11 @@ Camera camera;
 
   GLuint translateMatrix_link;
   GLuint viewMatrix_link;
+  GLuint projectionMatrix_link;
 
   glm::mat4 translateMatrix; 
   glm::mat4 viewMatrix;	
+  glm::mat4 projectionMatrix;
 
    GLuint cameraPositionX;
 

@@ -16,7 +16,7 @@ Camera::Camera(){
           mouseDeltaX = 1;
 	  mouseDeltaY = 1;
 
-	  cameraMovementSpeed = 0.05;
+	  cameraMovementSpeed = 0.25;
 }
 
 glm::mat4 Camera::UpdateCameraPosition(Input input_Direction, int mouseX, int mouseY){

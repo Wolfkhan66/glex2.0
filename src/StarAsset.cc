@@ -1,15 +1,13 @@
 #include "StarAsset.h"
 
-
-
 // based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 //http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 
-StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
+StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
-
-		0.0f   + positionX, 1.0f     + positionY, 0.5f + positionZ,
+		
+                0.0f  + positionX, 1.0f     + positionY, 0.5f + positionZ,
 		-0.25f + positionX, 0.25f  + positionY, 0.5f + positionZ,
 		0.25f  + positionX, 0.25f  + positionY, 0.5f + positionZ,
 		-1.0f    + positionX, 0.0f   + positionY, 0.5f + positionZ,
@@ -19,28 +17,22 @@ StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
 		0.25f  + positionX, -0.25f + positionY, 0.5f + positionZ,
 		0.0f   + positionX, -1.0f    + positionY, 0.5f + positionZ
   };
+  GLfloat vertex_buffer_length = sizeof(vertex_buffer_data);
 
-  element_buffer_length = 36;
+   GLfloat g_colour_buffer_data[] = {
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f,
+1.000f, 1.000f, 0.000f
+  };
+	colour_buffer_length = sizeof(g_colour_buffer_data);
 
-
-GLfloat g_colour_buffer_data[] = {
-
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f,
-1.000f, 0.843f, 0.000f
-
-};
-
-colour_buffer_length = sizeof(g_colour_buffer_data);
 
   GLuint element_buffer []  {
-  
-//star
 0,1,2,
 1,4,2,
  
@@ -50,8 +42,10 @@ colour_buffer_length = sizeof(g_colour_buffer_data);
 1,6,3,
 4,6,7 ,
 7,6,8 
-	
   };
+  element_buffer_length = sizeof(element_buffer);
+
+
 
   // Transfer buffers to the GPU
   //
@@ -60,8 +54,7 @@ colour_buffer_length = sizeof(g_colour_buffer_data);
   glGenBuffers(1, &vertex_buffer_token);
   // immediately bind the buffer and transfer the data
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 27, vertex_buffer_data, GL_STATIC_DRAW);
-
+  glBufferData(GL_ARRAY_BUFFER, vertex_buffer_length, vertex_buffer_data, GL_STATIC_DRAW);
 
 
 	glGenBuffers(1, &colour_buffer_token);
@@ -71,7 +64,7 @@ colour_buffer_length = sizeof(g_colour_buffer_data);
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, element_buffer, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, element_buffer_length, element_buffer, GL_STATIC_DRAW);
 }
 
 StarAsset::~StarAsset() {
@@ -83,6 +76,11 @@ StarAsset::~StarAsset() {
 // define symbol to be nothing
 #define checkGLError()
 #endif
+
+float StarAsset::randomcolour(){
+  float rc = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+  return rc;
+}
 
 void StarAsset::checkError(std::string file, int line) {
   GLenum gl_error = glGetError();
@@ -123,39 +121,38 @@ void StarAsset::Draw(GLuint program_token) {
 
   // use the previously transferred buffer as the vertex array.  This way
   // we transfer the buffer once -- at construction -- not on every frame.
+  glEnableVertexAttribArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
   glVertexAttribPointer(
-                        position_attrib,               /* attribute */
-                        3,                             /* size */
-                        GL_FLOAT,                      /* type */
-                        GL_FALSE,                      /* normalized? */
-                        0,                             /* stride */
-                        (void*)0                       /* array buffer offset */
-                        );
-  glEnableVertexAttribArray(position_attrib);
+    0,        /* attribute */
+    3,        /* size */
+    GL_FLOAT,   /* type */
+    GL_FALSE,   /* normalized? */
+    0,        /* stride */
+    (void*)0    /* array buffer offset */
+  );
+  glEnableVertexAttribArray(1);
+  checkGLError();
 
+  glBindBuffer(GL_ARRAY_BUFFER, colour_buffer_token);
+  glVertexAttribPointer(
+    1,        /* attribute */
+    3,        /* size */
+    GL_FLOAT,   /* type */
+    GL_FALSE,   /* normalized? */
+    0,        /* stride */
+    (void*)0    /* array buffer offset */
+  );
   checkGLError();
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
   glDrawElements(
-                 GL_TRIANGLES,
-                 element_buffer_length,
-                 GL_UNSIGNED_INT,
-                 (GLvoid*) 0
-                 );
-
+    GL_TRIANGLES,
+    element_buffer_length,
+    GL_UNSIGNED_INT,
+    (GLvoid*) 0
+  );
   checkGLError();
-
- // 2nd attribute buffer : colors
- glBindBuffer(GL_ARRAY_BUFFER, colour_buffer_token);
- glVertexAttribPointer(
-     1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-     3,                                // size
-     GL_FLOAT,                         // type
-     GL_FALSE,                         // normalized?
-     0,                                // stride
-     (void*)0                          // array buffer offset
- );
 
   glDisableVertexAttribArray(position_attrib);
 }

@@ -27,19 +27,13 @@ mat4 projection(
            );
 }
 
-mat4 translate(float x, float y, float z) {
-    return mat4(
-             vec4(1.0, 0.0, 0.0, 0.0),
-             vec4(0.0, 1.0, 0.0, 0.0),
-             vec4(0.0, 0.0, 1.0, 0.0),
-             vec4(x, y, z, 1.0)
-           );
-}
 
 void main() {
       gl_Position = projection(radians(45.0), 4.0/3.0, -0.1, -1000.0)
 		     * viewMatrix
-                     * translate(0.0, 0.0, 0.0)
+                     * translateMatrix
                      * vec4(position, 1.0);
  			frag_colour = colour;
 }
+
+

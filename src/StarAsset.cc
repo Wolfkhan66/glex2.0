@@ -1,5 +1,10 @@
 #include "StarAsset.h"
 
+
+
+// based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
+//http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
+
 StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
@@ -16,6 +21,23 @@ StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
   };
 
   element_buffer_length = 36;
+
+
+GLfloat g_colour_buffer_data[] = {
+
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f,
+1.000f, 0.843f, 0.000f
+
+};
+
+colour_buffer_length = sizeof(g_colour_buffer_data);
+
   GLuint element_buffer []  {
   
 //star
@@ -36,10 +58,16 @@ StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ) {
 
   // create buffer
   glGenBuffers(1, &vertex_buffer_token);
-
   // immediately bind the buffer and transfer the data
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 27, vertex_buffer_data, GL_STATIC_DRAW);
+
+
+
+	glGenBuffers(1, &colour_buffer_token);
+	glBindBuffer(GL_ARRAY_BUFFER, colour_buffer_token);
+	glBufferData(GL_ARRAY_BUFFER, colour_buffer_length, g_colour_buffer_data, GL_STATIC_DRAW);
+
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
@@ -117,6 +145,17 @@ void StarAsset::Draw(GLuint program_token) {
                  );
 
   checkGLError();
+
+ // 2nd attribute buffer : colors
+ glBindBuffer(GL_ARRAY_BUFFER, colour_buffer_token);
+ glVertexAttribPointer(
+     1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+     3,                                // size
+     GL_FLOAT,                         // type
+     GL_FALSE,                         // normalized?
+     0,                                // stride
+     (void*)0                          // array buffer offset
+ );
 
   glDisableVertexAttribArray(position_attrib);
 }

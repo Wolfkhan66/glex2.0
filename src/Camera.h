@@ -14,9 +14,19 @@ private:
 	float cameraPositionX;
 	float cameraPositionY;
 	float cameraPositionZ;
+	glm::vec3 cameraPosition;
 
-	float horizontalAngle;
-	float verticalAngle;
+	glm::vec3 direction;
+	glm::vec3 right;
+	glm::vec3 up;
+
+ 	float horizontalAngle;
+ 	float verticalAngle;
+ 
+	float mouseDeltaX;
+	float mouseDeltaY;
+
+	float cameraMovementSpeed;
 
 
 };

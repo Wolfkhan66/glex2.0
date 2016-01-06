@@ -1,5 +1,8 @@
 #include "CubeAsset.h"
 
+// based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
+//http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
+
 CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
@@ -12,10 +15,41 @@ CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
 	 0.5f + positionX,-0.5f + positionY,-0.5f  + positionZ,	//6 bbr
 	 0.5f + positionX,0.5f  + positionY,-0.5f  + positionZ  //7 btr
   };
-
   element_buffer_length = 36;
+
+
+
+
+ GLfloat g_colour_buffer_data[] = {
+
+
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f,
+0.000f, 0.000f, 1.000f
+
+
+/*
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ,
+0.827f+ positionX, 0.827f+ positionY, 0.827f+ positionZ */
+
+};
+
+
+	colour_buffer_length = sizeof(g_colour_buffer_data);
+
+
   GLuint element_buffer []  {
-  
  //cube
 	0,1,2, //Front
 	0,3,2,
@@ -37,15 +71,22 @@ CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
 	
   };
 
+
+
   // Transfer buffers to the GPU
   //
 
   // create buffer
   glGenBuffers(1, &vertex_buffer_token);
-
   // immediately bind the buffer and transfer the data
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, vertex_buffer_data, GL_STATIC_DRAW);
+
+
+	glGenBuffers(1, &colour_buffer_token);
+	glBindBuffer(GL_ARRAY_BUFFER, colour_buffer_token);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, g_colour_buffer_data, GL_STATIC_DRAW);
+
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
@@ -123,6 +164,17 @@ void CubeAsset::Draw(GLuint program_token) {
                  );
 
   checkGLError();
+
+ // 2nd attribute buffer : colors
+ glBindBuffer(GL_ARRAY_BUFFER, colour_buffer_token);
+ glVertexAttribPointer(
+     1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+     3,                                // size
+     GL_FLOAT,                         // type
+     GL_FALSE,                         // normalized?
+     0,                                // stride
+     (void*)0                          // array buffer offset
+ );
 
   glDisableVertexAttribArray(position_attrib);
 }

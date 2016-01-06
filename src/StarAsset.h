@@ -21,8 +21,8 @@ class StarAsset : public GameAsset {
 
  private:
 
-  GLuint element_buffer_length;
-  GLuint vertex_buffer_token, element_buffer_token;
+  GLuint element_buffer_length, colour_buffer_length;
+  GLuint vertex_buffer_token, element_buffer_token, colour_buffer_token;
   void checkError(string file, int line);
 };
 

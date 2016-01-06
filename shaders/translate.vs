@@ -4,8 +4,9 @@
 #version 130
 
 in vec3 position;
+in vec3 colour;
 
-out vec3 frag_color;
+out vec3 frag_colour;
 
 
 uniform mat4 translateMatrix;
@@ -40,5 +41,5 @@ void main() {
 		     * viewMatrix
                      * translate(0.0, 0.0, 0.0)
                      * vec4(position, 1.0);
- 			frag_color = vec3(1.0, 0.0, 0.0); // Colour
+ 			frag_colour = colour;
 }

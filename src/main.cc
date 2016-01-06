@@ -155,6 +155,8 @@ int main(int argc, char ** argv) {
   // Call the function "tick" every delay milliseconds
   SDL_AddTimer(delay, tick, NULL);
 
+ SDL_SetRelativeMouseMode(SDL_TRUE);
+
    // Add the main event loop
    SDL_Event event;
    while (SDL_WaitEvent(&event)) {
@@ -166,7 +168,7 @@ int main(int argc, char ** argv) {
        break;
      case SDL_USEREVENT:
 {
-   SDL_GetMouseState(&mouseX, &mouseY);
+   SDL_GetRelativeMouseState(&mouseX, &mouseY);
 
     	keyboard_state = SDL_GetKeyboardState(NULL);
     	if(keyboard_state[SDL_SCANCODE_A]){
@@ -177,6 +179,8 @@ int main(int argc, char ** argv) {
     		input_direction = RIGHT;
     	}else if(keyboard_state[SDL_SCANCODE_W]){
     		input_direction = UP;
+    	}else if(keyboard_state[SDL_SCANCODE_ESCAPE]){
+    		SDL_Quit();
     	}else{
     		input_direction = NILL;
     	}

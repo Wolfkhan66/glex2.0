@@ -1,7 +1,6 @@
 #include "StarAsset.h"
 
 // based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
-//http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 
 StarAsset::StarAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   // model coordinates, origin at centre.

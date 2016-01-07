@@ -29,7 +29,7 @@ class GameAssetManager {
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
   void Draw();
-void UpdateCameraPosition(Input, int mouseX, int mouseY);
+  void UpdateCameraPosition(Input, int mouseX, int mouseY);
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);
@@ -40,7 +40,7 @@ void UpdateCameraPosition(Input, int mouseX, int mouseY);
   // The internal scene graph is a simple list.
   std::vector<std::shared_ptr<GameAsset>> draw_list;
   GLuint program_token;
-Camera camera;
+  Camera camera;
 
 // variables to communicate with the shader(Camera)
 

@@ -3,15 +3,12 @@ compiler:
 - gcc
 
 before_install:
- - sudo apt-get update -qq
- - sudo apt-get install -y libsdl-* libglm-dev libglew-dev libboost-all-dev 
-
 - brew update -qq
 - brew install -y libsdl-* libglm-dev libglew-dev libboost-all-dev libsdl2-*
+
 branches:
 only:
 - master
 
 os:
-- linux
 - osx

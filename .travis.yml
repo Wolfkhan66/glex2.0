@@ -17,4 +17,4 @@ only:
 
 os:
 - linux
--osx
+- osx

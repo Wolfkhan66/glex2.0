@@ -14,7 +14,6 @@ class CubeAsset : public GameAsset {
   CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ);
   ~CubeAsset();
   virtual void Draw(GLuint);
-  float randomcolour();
 
 
  private:

@@ -76,11 +76,6 @@ StarAsset::~StarAsset() {
 #define checkGLError()
 #endif
 
-float StarAsset::randomcolour(){
-  float rc = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-  return rc;
-}
-
 void StarAsset::checkError(std::string file, int line) {
   GLenum gl_error = glGetError();
   if(GL_NO_ERROR != gl_error) {

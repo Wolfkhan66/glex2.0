@@ -15,7 +15,6 @@ class GroundAsset : public GameAsset {
   GroundAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ);
   ~GroundAsset();
   virtual void Draw(GLuint);
-  float randomcolour();
 
 
  private:

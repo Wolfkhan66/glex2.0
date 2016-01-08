@@ -81,10 +81,6 @@ GroundAsset::~GroundAsset() {
 #define checkGLError()
 #endif
 
-float GroundAsset::randomcolour(){
-  float rc = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-  return rc;
-}
 
 void GroundAsset::checkError(std::string file, int line) {
   GLenum gl_error = glGetError();

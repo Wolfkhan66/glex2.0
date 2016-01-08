@@ -23,6 +23,5 @@ only:
 
 os:
 - linux
-- windows7
 
 sudo: true

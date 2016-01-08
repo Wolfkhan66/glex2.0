@@ -7,6 +7,7 @@ GameWorld::GameWorld (ApplicationMode mode) {
 
 //// 2d array storing a maze generated using my own java maze generator, numbers represent room types from 1 to 15 that can only connect to other certain room types.
 //// tested and works - would be a simple matter to generated a map upto a 100x100 , anything beyond would be excessive for performance purposes
+//// with abit of time it wouldnt be too far fetched to port over my java map generator code and have a a dynamically random maze generated on a keypress or on each build
 	int maze [10][10] = {
 { 4,10,12, 7, 6, 2, 4, 7, 3, 3},
 { 3, 4, 8,11,14,12,12,15,13, 9},

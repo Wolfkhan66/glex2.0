@@ -12,9 +12,6 @@ before_install:
 - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
 
 
-- brew update
-- brew 
-
 script:
 - autoreconf -i
 - ./configure
@@ -27,7 +24,6 @@ only:
 
 os:
 - linux
-- osx
 - windows
 
 sudo: true

@@ -2,7 +2,6 @@
 
 // based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 
-
 CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
@@ -17,6 +16,8 @@ CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
   };
   GLfloat vertex_buffer_length = sizeof(vertex_buffer_data);
 
+
+/// based on the coloured cube tutorial stored float data for the rgb values of the cubes vertices
    GLfloat g_colour_buffer_data[] = {
 
 

@@ -9,6 +9,7 @@
 
 #include "GameAsset.h"
 
+
 class CubeAsset : public GameAsset {
  public:
   CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ);

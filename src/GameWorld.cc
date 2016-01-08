@@ -5,73 +5,8 @@ GameWorld::GameWorld (ApplicationMode mode) {
 
   asset_manager = std::make_shared<GameAssetManager>(mode);
 
-
-/*  //// used for testing
-
-int maze [3][3]{
-{1,1,1},
-{1,1,1},
-{1,1,4},
-};
-		for ( int x = 0; x < 3; x++)
-			{
-				for (int z = 0; z < 3; z++)
-					{
-						if (maze[x][z] == 1)
-							{	
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z)); // center bottom
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z)); // center left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z)); // center right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z+1)); // center top
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z-1)); // center bottom
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z+1)); // top left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z-1)); // bottom right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z-1)); // bottom left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z+1)); // top right
-							}
-							else if (maze[x][z] == 2)
-							{	
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z)); // center left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z)); // center right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z+1)); // center top
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z-1)); // center bottom
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z+1)); // top left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z-1)); // bottom right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z-1)); // bottom left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z+1)); // top right
-							}
-else if (maze[x][z] == 3)
-							{	
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z)); // center left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z)); // center right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z+1)); // center top
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z-1)); // center bottom
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z+1)); // top left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z-1)); // bottom right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z-1)); // bottom left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z+1)); // top right
-							}
-	
-else if (maze[x][z] == 4)
-							{	
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z)); // center left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z)); // center right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z+1)); // center top
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x,   -0.0 , -3.0 * z-1)); // center bottom
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z+1)); // top left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z-1)); // bottom right
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x+1, -0.0 , -3.0 * z-1)); // bottom left
-								asset_manager->AddAsset(std::make_shared<CubeAsset>(-3.0 * x-1, -0.0 , -3.0 * z+1)); // top right
-							}
-	
-	
-					}	
-
-			}
-
-
-*/
-
+//// 2d array storing a maze generated using my own java maze generator, numbers represent room types from 1 to 15 that can only connect to other certain room types.
+//// tested and works - would be a simple matter to generated a map upto a 100x100 , anything beyond would be excessive for performance purposes
 	int maze [10][10] = {
 { 4,10,12, 7, 6, 2, 4, 7, 3, 3},
 { 3, 4, 8,11,14,12,12,15,13, 9},
@@ -86,6 +21,9 @@ else if (maze[x][z] == 4)
 		};
 
 
+
+//// spawns cubes based on the positions in the array , numbers represent a 3x3 grid of cubes that represent a single room type.
+/// currently the star asset spawns in dead end rooms ( could be a collectible? )
 		for ( int x = 0; x < 10; x++)
 			{
 				for (int z = 0; z < 10; z++)
@@ -237,6 +175,8 @@ else if (maze[x][z] == 4)
 			}
 
 
+
+/// spawns the ground underneath the maze
 		for ( int  x = 0; x < 10; x++)
 			{	
 				for ( int z = 0; z < 10; z++)
@@ -254,12 +194,14 @@ else if (maze[x][z] == 4)
 			}	
 
 
-
+//// calls the draw method in GameAssetManager.cc
 }
 
 	void GameWorld::Draw() {
   		asset_manager->Draw();
 }
+
+//// calls the updatecamera method in GameAssetManager passing the user input and mouse coordnates.
 
 	void GameWorld::UpdateCameraPosition(Input input_direction, int mouseX, int mouseY){
 		asset_manager->UpdateCameraPosition(input_direction,  mouseX,  mouseY);

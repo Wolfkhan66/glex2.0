@@ -4,6 +4,8 @@
  * Creates a GameAssetManager to load the correct shaders based on the
  * ApplicationMode.
  */
+// also communicates with the camera class passing variables to update the cameras position
+
 GameAssetManager::GameAssetManager(ApplicationMode mode) {
   std::string vertex_shader("shaders/translate.vs");
   std::string fragment_shader("shaders/fragment.fs");
@@ -22,15 +24,20 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
 
+// link to the uniform variables in the translate shader
+
 projectionMatrix_link = glGetUniformLocation(program_token, "projectionMatrix");
  translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
 viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
 
+
+	// create the matrix based on the window size // used to solve z buffering
 projectionMatrix = glm::perspective(glm::radians(45.0f), (float) 640/ (float) 480, 0.1f, 1000.0f);
 
 }
 
 
+// communicates with camera class
 void GameAssetManager::UpdateCameraPosition(Input input_Direction,  int mouseX, int mouseY){
 
 
@@ -58,6 +65,8 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
 
+
+/// before drawing an asset , update the matrix values in the translate shader
 	glUniformMatrix4fv(projectionMatrix_link, 1, GL_FALSE, &projectionMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
 	glUniformMatrix4fv(translateMatrix_link, 1, GL_FALSE, &translateMatrix[0][0]);

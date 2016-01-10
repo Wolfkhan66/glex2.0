@@ -10,8 +10,6 @@ before_install:
 - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install -y gcc-4.8 g++-4.8 libsdl-* libglm-dev libglew-dev libboost-all-dev libsdl2-dev ; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90 ; fi
 
-    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-
 script:
 - autoreconf -i
 - ./configure
@@ -23,5 +21,6 @@ only:
 
 os:
 - linux
+- osx
 
 sudo: true

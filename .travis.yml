@@ -13,7 +13,7 @@ before_install:
 
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install GLM GLEW SDL2 SDL; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install GL GLM GLEW SDL2 SDL; fi
 
 script:
 - autoreconf -i

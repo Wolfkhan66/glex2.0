@@ -30,6 +30,3 @@ os:
 - osx
 
 sudo: true
-
- allow_failures:
-    - os: osx

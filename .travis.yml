@@ -1,4 +1,4 @@
-language: cpp
+language: objective c
 compiler:
 - gcc
 - clang
@@ -15,7 +15,7 @@ before_install:
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install  sdl glm glew sdl2; fi
  
 
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew link sdl glm glew sdl2; fi
+
 
 script:
 - autoreconf -i
@@ -30,7 +30,6 @@ os:
 - linux
 - osx
 
-allow_failures:
-- os: osx
+
 
 sudo: true

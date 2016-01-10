@@ -12,7 +12,7 @@ before_install:
 
 
 
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install gcc-4.8 g++-4.8 libsdl-* libglm-dev libglew-dev libboost-all-dev libsdl2-dev ; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install gcc g++ sdl glm glew sdl2; fi
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
 

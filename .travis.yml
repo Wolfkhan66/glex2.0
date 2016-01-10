@@ -12,7 +12,7 @@ before_install:
 
 
 
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install glew sdl sdl2 glm cmake; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install glew ; fi
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
 

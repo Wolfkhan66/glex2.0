@@ -12,7 +12,7 @@ before_install:
 
 
 
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install glfw2 sdl glm glew sdl2; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install g++-4.8 glfw2 sdl glm glew sdl2; fi
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
 

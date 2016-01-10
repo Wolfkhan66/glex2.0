@@ -12,8 +12,9 @@ before_install:
 
 
 
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew tap homebrew/glew ; fi
+
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install OPENGL GLM GLEW SDL2 SDL; fi
 
 script:
 - autoreconf -i

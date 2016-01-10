@@ -17,7 +17,6 @@ before_install:
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
 
 script:
-- cmake .
 - autoreconf -i
 - ./configure
 - make

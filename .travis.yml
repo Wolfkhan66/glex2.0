@@ -29,4 +29,7 @@ os:
 - linux
 - osx
 
+allow_failures:
+- os: osx
+
 sudo: true

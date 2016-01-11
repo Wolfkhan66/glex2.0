@@ -12,7 +12,8 @@ before_install:
 
 
 
- 
+- if [ "$TRAVIS_OS_NAME" == "osx"]; then brew update; fi
+- if [ "$TRAVIS_OS_NAME" == "osx]; then brew install glew glm mesa sdl sdl2; fi
 
 
 
@@ -27,6 +28,7 @@ only:
 
 os:
 - linux
+- osx
 
 
 

@@ -13,7 +13,7 @@ before_install:
 
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew update ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install mesa sdl glm glew sdl2; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then  brew install MesaLib sdl glm glew sdl2; fi
 
 
 

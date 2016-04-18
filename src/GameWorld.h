@@ -8,8 +8,8 @@
 #include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
-#include "StarAsset.h"
-#include "GroundAsset.h"
+//#include "StarAsset.h"
+//#include "GroundAsset.h"
 
 /**
  * GameWorld allows us to separate the management of the game world from the

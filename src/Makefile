@@ -107,7 +107,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_shaderexample_OBJECTS = main.$(OBJEXT) GameWorld.$(OBJEXT) \
 	GameAssetManager.$(OBJEXT) CubeAsset.$(OBJEXT) \
-	StarAsset.$(OBJEXT) Camera.$(OBJEXT) GroundAsset.$(OBJEXT)
+	Camera.$(OBJEXT) BoundingBox.$(OBJEXT) GameAsset.$(OBJEXT)
 shaderexample_OBJECTS = $(am_shaderexample_OBJECTS)
 shaderexample_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_$(V))
@@ -176,13 +176,13 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/wolf/glex2.0/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/wolf/glex2.0/missing autoconf
-AUTOHEADER = ${SHELL} /home/wolf/glex2.0/missing autoheader
-AUTOMAKE = ${SHELL} /home/wolf/glex2.0/missing automake-1.15
+AUTOCONF = ${SHELL} /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/missing autoconf
+AUTOHEADER = ${SHELL} /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/missing autoheader
+AUTOMAKE = ${SHELL} /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/missing automake-1.15
 AWK = gawk
 BOOST_CPPFLAGS = 
 BOOST_LDPATH = 
@@ -225,9 +225,9 @@ LIBS =  $(gl_LIBS) $(glew_LIBS) $(sdl2_LIBS) \
 	$(BOOST_THREAD_LIBS) $(BOOST_PROGRAM_OPTIONS_LIBS)
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
-LN_S = ln -s
+LN_S = ln
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/wolf/glex2.0/missing makeinfo
+MAKEINFO = ${SHELL} /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -253,10 +253,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 0.1
-abs_builddir = /home/wolf/glex2.0/src
-abs_srcdir = /home/wolf/glex2.0/src
-abs_top_builddir = /home/wolf/glex2.0
-abs_top_srcdir = /home/wolf/glex2.0
+abs_builddir = /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/src
+abs_srcdir = /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/src
+abs_top_builddir = /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2
+abs_top_srcdir = /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -290,7 +290,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/wolf/glex2.0/install-sh
+install_sh = ${SHELL} /home/as987/H_Drive/Files/Year_2/ci224_Games_Development/test2/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -312,8 +312,8 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-EXTRA_DIST = GameWorld.h GameAssetManager.h GameAsset.h CubeAsset.h StarAsset.h Camera.h GroundAsset.h
-shaderexample_SOURCES = main.cc GameWorld.cc GameAssetManager.cc CubeAsset.cc StarAsset.cc Camera.cc GroundAsset.cc
+EXTRA_DIST = GameWorld.h GameAssetManager.h GameAsset.h CubeAsset.h Camera.h BoundingBox.h 
+shaderexample_SOURCES = main.cc GameWorld.cc GameAssetManager.cc CubeAsset.cc Camera.cc BoundingBox.cc GameAsset.cc
 AM_CPPFLAGS = -DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES -std=c++11 \
 	$(gl_CFLAGS) $(glew_CFLAGS) $(sdl2_CFLAGS) $(BOOST_CPPFLAGS)
 all: all-am
@@ -409,12 +409,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/BoundingBox.Po
 include ./$(DEPDIR)/Camera.Po
 include ./$(DEPDIR)/CubeAsset.Po
+include ./$(DEPDIR)/GameAsset.Po
 include ./$(DEPDIR)/GameAssetManager.Po
 include ./$(DEPDIR)/GameWorld.Po
-include ./$(DEPDIR)/GroundAsset.Po
-include ./$(DEPDIR)/StarAsset.Po
 include ./$(DEPDIR)/main.Po
 
 .cc.o:

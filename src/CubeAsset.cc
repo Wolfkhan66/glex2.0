@@ -1,8 +1,9 @@
 #include "CubeAsset.h"
+#include "GameAsset.h"
 
 // based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 
-CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) {
+CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) : GameAsset(positionX, positionY, positionZ) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
 		-0.5f + positionX, -0.5f + positionY, -0.5f + positionZ,

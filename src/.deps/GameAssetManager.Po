@@ -303,7 +303,8 @@ GameAssetManager.o: GameAssetManager.cc /usr/include/stdc-predef.h \
  /usr/include/glm/gtx/simd_vec4.inl /usr/include/glm/gtx/simd_mat4.hpp \
  /usr/include/glm/detail/intrinsic_matrix.hpp \
  /usr/include/glm/detail/intrinsic_matrix.inl \
- /usr/include/glm/gtx/simd_mat4.inl common.h GameAsset.h Camera.h
+ /usr/include/glm/gtx/simd_mat4.inl common.h GameAsset.h BoundingBox.h \
+ Camera.h
 
 /usr/include/stdc-predef.h:
 
@@ -1146,5 +1147,7 @@ GameAssetManager.h:
 common.h:
 
 GameAsset.h:
+
+BoundingBox.h:
 
 Camera.h:

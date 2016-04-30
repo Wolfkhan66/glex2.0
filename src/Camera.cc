@@ -16,7 +16,7 @@ Camera::Camera(){
 	  horizontalAngle = 0;
 	  verticalAngle = 0;
 
-          mouseDeltaX = 1;
+      mouseDeltaX = 1;
 	  mouseDeltaY = 1;
 
 	  cameraMovementSpeed = 0.25;

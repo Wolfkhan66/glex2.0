@@ -27,7 +27,7 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 // link to the uniform variables in the translate shader
 
 projectionMatrix_link = glGetUniformLocation(program_token, "projectionMatrix");
- translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
+translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
 viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
 
 
@@ -69,7 +69,26 @@ void GameAssetManager::Draw() {
 /// before drawing an asset , update the matrix values in the translate shader
 	glUniformMatrix4fv(projectionMatrix_link, 1, GL_FALSE, &projectionMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+
+	translateMatrix= ga->GetModelTransformation();
 	glUniformMatrix4fv(translateMatrix_link, 1, GL_FALSE, &translateMatrix[0][0]);
+
+
+		bounding_box1_max = ga->GetMaxAndMin(1);
+		bounding_box1_min = ga->GetMaxAndMin(2);
+		bounding_box1_position = ga->GetVec3();
+
+		for(auto ga2: draw_list)
+		{
+            bounding_box2_max = ga2->GetMaxAndMin(1);
+            bounding_box2_min = ga2->GetMaxAndMin(2);
+            bounding_box2_position = ga2->GetVec3();
+
+            //If the two bounding boxes are not in the same position (not the same bounding box), then check for a collision.
+            if( bounding_box1_position != bounding_box2_position){
+                ga -> CheckCollision(bounding_box1_max, bounding_box1_min, bounding_box2_max, bounding_box2_min);
+            }
+		}
 
     ga->Draw(program_token);
   }

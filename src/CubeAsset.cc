@@ -3,17 +3,17 @@
 
 // based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 
-CubeAsset::CubeAsset(GLfloat positionX,GLfloat positionY,GLfloat positionZ ) : GameAsset(positionX, positionY, positionZ) {
+CubeAsset::CubeAsset(glm::vec3 p,int type, float scale, glm::vec3 rotation, glm::vec3 speed) : GameAsset(p , type, scale, rotation, speed) {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
-		-0.5f + positionX, -0.5f + positionY, -0.5f + positionZ,
-		-0.5f + positionX,  0.5f + positionY, -0.5f + positionZ,
-		 0.5f + positionX, -0.5f + positionY, -0.5f + positionZ,
-		 0.5f + positionX,  0.5f + positionY, -0.5f + positionZ,
-		 0.5f + positionX, -0.5f + positionY,  0.5f + positionZ,
-		 0.5f + positionX,  0.5f + positionY,  0.5f + positionZ,
-		-0.5f + positionX, -0.5f + positionY,  0.5f + positionZ,
-		-0.5f + positionX,  0.5f + positionY,  0.5f + positionZ
+-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,
+		-0.5f + position.x,  0.5f + position.y, -0.5f + position.z,
+		 0.5f + position.x, -0.5f + position.y, -0.5f + position.z,
+		 0.5f + position.x,  0.5f + position.y, -0.5f + position.z,
+		 0.5f + position.x, -0.5f + position.y,  0.5f + position.z,
+		 0.5f + position.x,  0.5f + position.y,  0.5f + position.z,
+		-0.5f + position.x, -0.5f + position.y,  0.5f + position.z,
+		-0.5f + position.x,  0.5f + position.y,  0.5f + position.z
   };
   GLfloat vertex_buffer_length = sizeof(vertex_buffer_data);
 

@@ -20,11 +20,17 @@ GameWorld::GameWorld (ApplicationMode mode) {
 	{ 9,11,14,14,13,11,15,12,15,13},
 	{ 5,14, 2, 4,14, 8, 1, 1, 5, 8},
 };
-		asset_manager->AddAsset(std::make_shared<CubeAsset>(0.0, 3.0 , 0.0));
-		asset_manager->AddAsset(std::make_shared<CubeAsset>(0.0, 0.0 , 3.0));
+		asset_manager->AddAsset(std::make_shared<CubeAsset>(glm::vec3(3.0, 0.0, 0.0), 4, 1, glm::vec3(0.0,0.0,0.0), glm::vec3(0.0,0.0,0.0)));
+        asset_manager->AddAsset(std::make_shared<CubeAsset>(glm::vec3(0.0, 0.0, 0.0), 4, 1, glm::vec3(0.0,0.0,0.0), glm::vec3(0.04,0.0,0.0)));
+        asset_manager->AddAsset(std::make_shared<CubeAsset>(glm::vec3(-6.0, 0.0, 0.0), 4, 1, glm::vec3(0.0,0.0,0.0), glm::vec3(0.0,0.0,0.0)));
 
 
-			
+
+        asset_manager->AddAsset(std::make_shared<CubeAsset>(glm::vec3(0.0, 0.0, 3.0), 2, 1, glm::vec3(0.0,0.0,0.0), glm::vec3(0.0,0.0,0.0)));
+        asset_manager->AddAsset(std::make_shared<CubeAsset>(glm::vec3(3.0, 0.0, 3.0), 3, 5, glm::vec3(0.0,0.0,0.0), glm::vec3(0.0,0.0,0.0)));
+
+
+
 //// calls the draw method in GameAssetManager.cc
 }
 

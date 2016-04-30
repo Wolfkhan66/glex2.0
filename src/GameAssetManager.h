@@ -42,6 +42,14 @@ class GameAssetManager {
   GLuint program_token;
   Camera camera;
 
+  	    glm::vec3 bounding_box1_max;
+		glm::vec3 bounding_box1_min;
+		glm::vec3 bounding_box2_max;
+		glm::vec3 bounding_box2_min;
+
+		glm::vec3 bounding_box1_position;
+		glm::vec3 bounding_box2_position;
+
 // variables to communicate with the shader(Camera)
 
 
@@ -49,8 +57,8 @@ class GameAssetManager {
   GLuint viewMatrix_link;
   GLuint projectionMatrix_link;
 
-  glm::mat4 translateMatrix; 
-  glm::mat4 viewMatrix;	
+  glm::mat4 translateMatrix;
+  glm::mat4 viewMatrix;
   glm::mat4 projectionMatrix;
 
    GLuint cameraPositionX;

@@ -1,21 +1,24 @@
 #ifndef GAMEASSET_H
 #define GAMEASSET_H
 
+#include <GL/gl.h>
 #include <iostream>
 #include <memory>
 
-#include <GL/gl.h>
-
 #include "BoundingBox.h"
 
-class GameAsset {
+class GameAsset{
 	public:
-		GameAsset(float, float, float);
-		
-		virtual void Draw(GLuint) = 0;
+		GameAsset(glm::vec3, int, float, glm::vec3, glm::vec3);
 
-		std::shared_ptr<BoundingBox> BBox;
-		glm::mat4 GetTranslationMatrix();
+		virtual void Draw(GLuint) = 0;
+		glm::mat4 GetModelTransformation();
+		glm::vec3 GetMaxAndMin(int);
+		void CheckCollision(glm::vec3, glm::vec3, glm::vec3, glm::vec3);
+		glm::vec3 GetVec3();
+
+	private:
+		std::shared_ptr<BoundingBox> bounding_box;
 };
 
 #endif

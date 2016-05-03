@@ -7,24 +7,24 @@ class Camera{
 
 public:
 	Camera();
-	glm::mat4 UpdateCameraPosition(Input input_Direction, int mouseX, int mouseY);
+	glm::mat4 UpdateCameraPosition(Input input_direction, int mouse_x, int mouse_y);
 
 private:
 
 
-	glm::vec3 cameraPosition;
+	glm::vec3 camera_position;
 
-	glm::vec3 direction;
-	glm::vec3 right;
-	glm::vec3 up;
+	glm::vec3 camera_direction;
+	glm::vec3 camera_right;
+	glm::vec3 camera_up;
 
- 	float horizontalAngle;
- 	float verticalAngle;
- 
-	float mouseDeltaX;
-	float mouseDeltaY;
+ 	float camera_horizontal_angle;
+ 	float camera_vertical_angle;
 
-	float cameraMovementSpeed;
+	float mouse_delta_x;
+	float mouse_delta_y;
+
+	float camera_movement_speed;
 
 
 };

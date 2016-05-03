@@ -15,7 +15,7 @@
 /*
  * SDL timers run in separate threads.  In the timer thread
  * push an event onto the event queue.  This event signifies
- * to call display() from the thread in which the OpenGL 
+ * to call display() from the thread in which the OpenGL
  * context was created.
  */
 Uint32 tick(Uint32 interval, void *param) {
@@ -144,8 +144,8 @@ int main(int argc, char ** argv) {
   auto window = InitWorld();
   auto game_world = std::make_shared<GameWorld>(mode);
 
-	int mouseX;
-	int mouseY;
+	int mouse_x;
+	int mouse_y;
 	const Uint8 *keyboard_state;
 	Input input_direction = NILL;
   if(!window) {
@@ -161,35 +161,45 @@ int main(int argc, char ** argv) {
    SDL_Event event;
    while (SDL_WaitEvent(&event)) {
 
- 
+
      switch (event.type) {
      case SDL_QUIT:
        SDL_Quit();
        break;
      case SDL_USEREVENT:
 {
-   SDL_GetRelativeMouseState(&mouseX, &mouseY);
+   SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
 
     	keyboard_state = SDL_GetKeyboardState(NULL);
-    	if(keyboard_state[SDL_SCANCODE_A]){
+    	if(keyboard_state[SDL_SCANCODE_A])
+    	{
     		input_direction = LEFT;
-   	}else if(keyboard_state[SDL_SCANCODE_S]){
+        }
+        else if(keyboard_state[SDL_SCANCODE_S])
+        {
    		input_direction = DOWN;
-    	}else if(keyboard_state[SDL_SCANCODE_D]){
+    	}
+    	else if(keyboard_state[SDL_SCANCODE_D])
+    	{
     		input_direction = RIGHT;
-    	}else if(keyboard_state[SDL_SCANCODE_W]){
+    	}
+    	else if(keyboard_state[SDL_SCANCODE_W])
+    	{
     		input_direction = UP;
-    	}else if(keyboard_state[SDL_SCANCODE_ESCAPE]){
+    	}
+    	else if(keyboard_state[SDL_SCANCODE_ESCAPE])
+    	{
     		SDL_Quit();
-    	}else{
+    	}
+    	else
+    	{
     		input_direction = NILL;
     	}
-
-      game_world->UpdateCameraPosition(input_direction, mouseX, mouseY);
-       Draw(window, game_world);
+        game_world->UpdateCameraPosition(input_direction, mouse_x, mouse_y);
+        Draw(window, game_world);
        break;
 	}
- 
+
      default:
        break;
      }

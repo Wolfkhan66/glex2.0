@@ -3,7 +3,18 @@
 
 // based on tutorials found here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/
 
-CubeAsset::CubeAsset(glm::vec3 p,int type, float scale, glm::vec3 rotation, glm::vec3 speed) : GameAsset(p , type, scale, rotation, speed) {
+CubeAsset::CubeAsset(glm::vec3 p, glm::vec3 c,int type, float scale, glm::vec3 rotation, glm::vec3 speed) : GameAsset(p , type, scale, rotation, speed) {
+
+
+	if(glm::to_string(c) == glm::to_string(glm::vec3(-0.1, -0.1, -0.1)))
+	{
+		c = glm::vec3(rf(),rf(),rf());
+	}
+	else
+	{
+		c = glm::vec3(c.x/255, c.y/255, c.z/255);
+	}
+
   // model coordinates, origin at centre.
   GLfloat vertex_buffer_data [] {
 -0.5f + position.x, -0.5f + position.y, -0.5f + position.z,
@@ -20,16 +31,14 @@ CubeAsset::CubeAsset(glm::vec3 p,int type, float scale, glm::vec3 rotation, glm:
 
 /// based on the coloured cube tutorial stored float data for the rgb values of the cubes vertices
    GLfloat g_colour_buffer_data[] = {
-
-
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f,
-		0.502f, 0.502f, 0.502f
+		c.x, c.y, c.z,
+		c.x, c.y, c.z,
+		c.x, c.y, c.z,
+		c.x, c.y, c.z,
+		c.x, c.y, c.z,
+		c.x, c.y, c.z,
+		c.x, c.y, c.z,
+		c.x, c.y, c.z
 
   };
 	colour_buffer_length = sizeof(g_colour_buffer_data);
@@ -89,6 +98,11 @@ void checkError(std::string file, int line) {
     std::cerr << "GL error in " << file << " at line " << line << " error: " << gl_error << std::endl;
     exit(-1);
   }
+}
+
+float CubeAsset::rf(){
+	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	return r;
 }
 
 void CubeAsset::Draw(GLuint program_token) {

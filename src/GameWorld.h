@@ -8,9 +8,11 @@
 #include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
+
+#include "ColourManager.h"
+
 //#include "StarAsset.h"
 //#include "GroundAsset.h"
-
 /**
  * GameWorld allows us to separate the management of the game world from the
  * nuts and bolts of game loop initialisation.  The GameWorld currently has
@@ -31,10 +33,12 @@ class GameWorld {
   void Draw();
 
 
-void UpdateCameraPosition(Input, int mouseX, int mouseY);
+void UpdateCameraPosition(Input, int mouse_x, int mouse_y);
 
 
  private:
+  ColourManager colour_manager;
   std::shared_ptr<GameAssetManager> asset_manager;
+
 };
 #endif // GAMEWORLD_H

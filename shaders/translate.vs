@@ -7,14 +7,14 @@ in vec3 colour;
 out vec3 frag_colour;
 
 
-uniform mat4 translateMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 projectionMatrix;
+uniform mat4 translate_matrix;
+uniform mat4 view_matrix;
+uniform mat4 projection_matrix;
 
 void main() {
-      gl_Position = projectionMatrix
-		     * viewMatrix
-                     * translateMatrix
+      gl_Position = projection_matrix
+		     * view_matrix
+                     * translate_matrix
                      * vec4(position, 1.0);
  			frag_colour = colour;
 }

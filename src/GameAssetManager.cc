@@ -26,22 +26,22 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 
 // link to the uniform variables in the translate shader
 
-projectionMatrix_link = glGetUniformLocation(program_token, "projectionMatrix");
-translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
-viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
+projection_matrix_link = glGetUniformLocation(program_token, "projection_matrix");
+translate_matrix_link = glGetUniformLocation(program_token, "translate_matrix");
+view_matrix_link = glGetUniformLocation(program_token, "view_matrix");
 
 
 	// create the matrix based on the window size // used to solve z buffering
-projectionMatrix = glm::perspective(glm::radians(45.0f), (float) 640/ (float) 480, 0.1f, 1000.0f);
+projection_matrix = glm::perspective(glm::radians(45.0f), (float) 640/ (float) 480, 0.1f, 1000.0f);
 
 }
 
 
 // communicates with camera class
-void GameAssetManager::UpdateCameraPosition(Input input_Direction,  int mouseX, int mouseY){
+void GameAssetManager::UpdateCameraPosition(Input input_direction,  int mouse_x, int mouse_y){
 
 
- viewMatrix = camera.UpdateCameraPosition(input_Direction, mouseX, mouseY);
+ view_matrix = camera.UpdateCameraPosition(input_direction, mouse_x, mouse_y);
 
   }
 /**
@@ -67,11 +67,11 @@ void GameAssetManager::Draw() {
 
 
 /// before drawing an asset , update the matrix values in the translate shader
-	glUniformMatrix4fv(projectionMatrix_link, 1, GL_FALSE, &projectionMatrix[0][0]);
-	glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+	glUniformMatrix4fv(projection_matrix_link, 1, GL_FALSE, &projection_matrix[0][0]);
+	glUniformMatrix4fv(view_matrix_link, 1, GL_FALSE, &view_matrix[0][0]);
 
-	translateMatrix= ga->GetModelTransformation();
-	glUniformMatrix4fv(translateMatrix_link, 1, GL_FALSE, &translateMatrix[0][0]);
+	translate_matrix= ga->GetModelTransformation();
+	glUniformMatrix4fv(translate_matrix_link, 1, GL_FALSE, &translate_matrix[0][0]);
 
 
 		bounding_box1_max = ga->GetMaxAndMin(1);

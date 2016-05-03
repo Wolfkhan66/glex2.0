@@ -47,7 +47,7 @@ glm::mat4 BoundingBox::GetModelTransformation()
 /**
  * Used to translate by a certain speed
  */
-void BoundingBox::Translate(glm::vec3 position_to)
+void BoundingBox::Translate(glm::vec3 translate_speed)
 {
 	//std::cout << "[BoundingBox::Translate()]: vec3 position_to" << std::endl;
 
@@ -58,7 +58,7 @@ void BoundingBox::Translate(glm::vec3 position_to)
 	//}
 	//else
 	//{
-		new_position = this->position + position_to;
+		new_position = this->position + translate_speed;
 	//}
 
 	this->position = new_position;
@@ -68,7 +68,7 @@ void BoundingBox::Translate(glm::vec3 position_to)
 /**
  * Used to scale by a certain speed
  */
-void BoundingBox::Scale(float scale_to)
+void BoundingBox::Scale(float scale_speed)
 {
     //std::cout << "[BoundingBox::Scale()]: float scale_to" << std::endl;
 
@@ -79,7 +79,7 @@ void BoundingBox::Scale(float scale_to)
 	}
 	else
 	{
-		new_scale = this->scale + scale_to;
+		new_scale = this->scale + scale_speed;
 	}
 
 	this->scale = new_scale;
@@ -89,7 +89,7 @@ void BoundingBox::Scale(float scale_to)
 /**
  * Used to rotate by a certain speed
  */
-void BoundingBox::Rotate(glm::vec3 rotate_to)
+void BoundingBox::Rotate(glm::vec3 rotate_speed)
 {
 		//std::cout << "[BoundingBox::Rotate()]: vec3 rotate_to" << std::endl;
 
@@ -100,7 +100,7 @@ void BoundingBox::Rotate(glm::vec3 rotate_to)
 	//}
 	//else
 	//{
-		new_rotation = this->rotation + rotate_to;
+		new_rotation = this->rotation + rotate_speed;
 	//}
 
 	this->rotation = new_rotation;
